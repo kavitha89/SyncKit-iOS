@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Boiler" representedClassName="Boiler" syncable="YES">
+        <attribute name="bCapacity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bCurrentContainment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bHealthStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bMake" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="boilerID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bPressure" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bTemp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastServerSyncDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastUpdatedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="syncStatus" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Pipe" representedClassName="Pipe" syncable="YES">
+        <attribute name="lastServerSyncDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastUpdatedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="pCurrentContainment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pDiameter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pHealthStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pipeID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pLength" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pMake" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pMaxPressure" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pMaxTemperature" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pPressure" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pTemperature" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="syncStatus" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Transformer" representedClassName="Transformer" syncable="YES">
+        <attribute name="lastServerSyncDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastUpdatedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="syncStatus" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+        <attribute name="transformerID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsCurrentTemp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsMake" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsOilLevel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsOperatingPower" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsWindingCount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trsWindingMake" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Turbine" representedClassName="Turbine" syncable="YES">
+        <attribute name="lastServerSyncDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastUpdatedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="syncStatus" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+        <attribute name="trbCapacity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbCompressorHealth" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbCurrentRPM" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbOilLevel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbPressure" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbRotationSpeed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbRotorCount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trbTemp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="turbineID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Boiler" positionX="-153" positionY="63" width="128" height="223"/>
+        <element name="Pipe" positionX="-144" positionY="126" width="128" height="253"/>
+        <element name="Transformer" positionX="-135" positionY="162" width="128" height="238"/>
+        <element name="Turbine" positionX="-126" positionY="171" width="128" height="253"/>
+    </elements>
+</model>

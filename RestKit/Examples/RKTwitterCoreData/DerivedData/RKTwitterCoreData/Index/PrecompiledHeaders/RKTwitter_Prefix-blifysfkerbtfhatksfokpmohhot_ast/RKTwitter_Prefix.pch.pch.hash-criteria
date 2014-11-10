@@ -1,0 +1,30 @@
+Contents of /Users/Veni/Documents/SyncKit/RestKit/Examples/RKTwitterCoreData/RKTwitter_Prefix.pch
+-x
+objective-c
+-arch
+i386
+-fretain-comments-from-system-headers
+-std=c99
+-fobjc-arc
+-fpascal-strings
+-O0
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk
+-fexceptions
+-fasm-blocks
+-g
+-fvisibility=hidden
+-fobjc-abi-version=2
+-fobjc-legacy-dispatch
+-mios-simulator-version-min=6.0
+-I/Users/Veni/Documents/SyncKit/RestKit/Examples/RKTwitterCoreData/DerivedData/RKTwitterCoreData/Build/Products/Debug-iphonesimulator/include
+-I/Users/Veni/Documents/SyncKit/RestKit/Examples/RKTwitterCoreData/DerivedData/RKTwitterCoreData/Build/Products/Debug-iphonesimulator/../../Headers
+-F/Users/Veni/Documents/SyncKit/RestKit/Examples/RKTwitterCoreData/DerivedData/RKTwitterCoreData/Build/Products/Debug-iphonesimulator
+-ferror-limit=10
+-working-directory=/Users/Veni/Documents/SyncKit/RestKit/Examples/RKTwitterCoreData
+-Xclang
+-detailed-preprocessing-record
+i386-apple-darwin13.2.0
+"4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)"
+SDK_PRODUCT_BUILD_VERSION=11D167
+11D167

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A74BE92E-EDF9-4640-A05C-D6CE162B4DF6</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SyncKit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EFCACBE4-5E24-4E4A-8064-9EF91FBC6A7A</key>
+		<string>https://code.cognizant.com/309222/synckit.git</string>
+		<key>FA2B0CF866C81541EAD0196B1A6F01119EC861BE</key>
+		<string>https://github.com/satheeshwaran/iOSBitsDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SyncKit.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EFCACBE4-5E24-4E4A-8064-9EF91FBC6A7A</key>
+		<string>../../../synckit</string>
+		<key>FA2B0CF866C81541EAD0196B1A6F01119EC861BE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/satheeshwaran/iOSBitsDemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FA2B0CF866C81541EAD0196B1A6F01119EC861BE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FA2B0CF866C81541EAD0196B1A6F01119EC861BE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOSBitsDemo</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EFCACBE4-5E24-4E4A-8064-9EF91FBC6A7A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>synckit</string>
+		</dict>
+	</array>
+</dict>
+</plist>

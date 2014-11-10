@@ -1,0 +1,66 @@
+kSyncEngine Credits
+
+Motivated and used a lot of re usable code base from a tutorial at http://www.raywenderlich.com by
+Chris Wagner, http://www.raywenderlich.com/17927/how-to-synchronize-core-data-with-a-web-service-part-2
+
+Operation Steps:
+
+
+First time sync:
+
+-Fetch all records for all registered models are downloaded - method in category that returns the BOOL saying first time or not. - done
+-update lastSyncDate column of each record to server updated time and change syncStatus to kObjectSynced-done
+-if all models were successfully synced then change lastSuccessfulCompleteSync for the app to current time.-
+
+Determining first time sync for each model:
+
+Make a fetch for all records with sync status kObjectSynced in the model - if count is 0 then it is first time sync - do fetch all, if count is more than 0 then it is not first time sync - do delta fetch
+
+OFFLINE OPERATIONS:
+
+Update of records   - change syncStatus to kObjectDirty -done
+crearion of records - change syncStatus to kObjectCreated -done
+deletion of records - change syncStatus to kObjectDeleted -done
+
+Other time sync:
+
+Find lastUpdatedValue for each registered model(excluding dirty records) and request for records that were updated after that time
+
+ -Try upserting all these records to datastore, 
+
+     -raise conflict if the server updated time is greater than local records lastUpdatedTime also the syncFlag is not set to any flag other than kObjectSynced.
+     -raise conflict if the server updated time is less than local records lastUpdatedTime also the syncFlag is not set to any flag other than kObjectSynced.
+     -raise conflict if the records sync flag is set to kObjectDeleted and the record is present in the updated list, according to user choice perform operation and update both client/server, update the sync flag appropriately.
+     -Insert all newly created records- change the syncFlag to kObjectSynced.
+     -Update all records that have lastUpdatedTime lesser than the servers records and the syncFlag set to kObjectSynced- change the syncFlag to kObjectSynced.
+
+Find all dirty records for all registered models by making getDirtyRecordsForClassName method call and start posting them- no conflicts should happen at this stage, when post is successful change syncFlag to kObjectSynced
+
+Find all deleted records and make delete calls to the server, on success callback delete/purge local records respectively.
+
+
+If there is a url defined for getting all server deleted records call that to all ids of the deleted records or else make a fetch all request with deletesOrphanedRecords flag in RestKit mapping to YES.
+
+-if all models were successfully synced then change lastSuccessfulCompleteSync for the app to current time.
+
+- we should have our own fetchAllmethod to return the table values ,since we are not deleted the local record, just changed the status to kObjectDeleted
+
+Addtions to configurable items:
+
+Add timeZoneOfLastUpdatedValueOnServer to all models that would register with SyncKit.
+Add one more setting preserverMostRecentChanges to conflict resolution
+
+Make Fetch All Request for all registered models, insert to DB.
+Compare local set of all records and server set, delete all orphan objects.
+Post Newly created objects to server.
+Delete objects in server that were delted locally.
+
+Open Points :-
+- it works for one base url
+PendinG TASK:-
+- get server deleted objects and update locally
+- custom merge and latest updated date is pending
+- Fetch all configuration time
+- oneline code to start sync
+- remove configurations from model
+
