@@ -68,6 +68,8 @@
 {
     dispatch_group_t group = dispatch_group_create();
     
+    NSDate *startDate = [NSDate date];
+    
     for(NSString *className in self.registeredClassesToSync)
     {
         /**
@@ -82,6 +84,11 @@
             
             dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
                 [[kSyncOperation sharedSyncOperationAPI] performFetchAllRequestForClass:className parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
+                    
+                    if ([operation.mappingResult array].count>0){
+                        [self postGoogleAnalytics:className withStatus:@"success" withStartDate:startDate withNoOfObjectsSynced:[operation.mappingResult array].count];
+                        
+                    }
                     
                     dispatch_group_leave(group);
                     
@@ -117,6 +124,12 @@
             
             [[kSyncOperation sharedSyncOperationAPI] performFetchAllRecordsOperationOfClass:className updatedAfterDate:mostRecentUpdatedDate success:^(RKObjectRequestOperation *operation, id responseObject) {
                 
+                if ([operation.mappingResult array].count>0)
+                {
+                    [self postGoogleAnalytics:className withStatus:@"success" withStartDate:startDate withNoOfObjectsSynced:[operation.mappingResult array].count];
+
+                    
+                }
                 dispatch_group_leave(group);
                 
             } failure:^(RKObjectRequestOperation *operation, NSError *error) {

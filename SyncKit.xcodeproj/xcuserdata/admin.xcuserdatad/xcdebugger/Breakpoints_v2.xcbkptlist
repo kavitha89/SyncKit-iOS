@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SyncKit/kSyncEngine.m"
-            timestampString = "438354997.662629"
+            timestampString = "438359145.11068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "-postAllDirtyRecordsToServer"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SyncKit/kSyncEngine.m"
-            timestampString = "438357173.341975"
+            timestampString = "438359145.11068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
-            landmarkName = "-postLocalObjectsToServer"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "-downloadDataForRegisteredObjects"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SyncKit/kSyncEngine.m"
-            timestampString = "438358227.528477"
+            timestampString = "438359145.11068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
-            landmarkName = "-deleteObjectsOnServer"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-downloadDataForRegisteredObjects"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
