@@ -896,7 +896,7 @@ forManagedObject:(NSManagedObject *)managedObject {
     
     /********** Measuring Events**********/
     [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Post %@ Objects To Server - %@", className,status]
-                                                               action:[NSString stringWithFormat:@"Time Taken-%f",[[NSDate date] timeIntervalSinceDate:startDate]]
+                                                               action:[NSString stringWithFormat:@"Time Taken-%f ms",[[NSDate date] timeIntervalSinceDate:startDate]]
                                                                 label:[NSString stringWithFormat:@"No. Of objects Synced-%@",[NSNumber numberWithInt:numberOfObjectsSynced                                                                   ]]
                                                                 value:nil] build]];
 }
