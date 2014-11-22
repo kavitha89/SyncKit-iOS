@@ -108,4 +108,15 @@
  */
 - (NSArray *)fetchAllRecordsForManagedObjectClass:(NSString *)className;
 
+
+/**
+ *  Posts all Data objects for the mentioned model
+ *
+ *  @param className The Model class name or the table name, status,noOfObjectsSynced.
+ *
+ *  @return Post all valid objects for the mentioned model class name.
+ */
+-(void)postGoogleAnalytics:(NSString*)className withStatus:(NSString*)status withStartDate:(NSDate*)startDate withNoOfObjectsSynced:(int)numberOfObjectsSynced;
+
+
 @end

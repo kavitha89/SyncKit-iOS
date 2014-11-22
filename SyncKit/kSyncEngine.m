@@ -243,18 +243,8 @@
                 
                 if(numberOfObjectsSynced == objectsToCreate.count)
                 {
-                    /********** Applying Values to Multiple Hits********/
-                    
-                    /* Set the screen name on the tracker */
-                    [self.tracker set:kGAIScreenName value:@"Sync Process"];
-                    [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
-                    
-                    /********** Measuring Events**********/
-                    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Post %@ Objects To Server - Success", className]
-                                                                               action:[NSString stringWithFormat:@"Time Taken-%f",[[NSDate date] timeIntervalSinceDate:startDate]]
-                                                                                label:[NSString stringWithFormat:@"No. Of objects Synced-%@",[NSNumber numberWithInt:numberOfObjectsSynced                                                                   ]]
-                                                                                value:nil] build]];
-                    
+                    ////
+                    [self postGoogleAnalytics:className withStatus:@"Success" withStartDate:startDate withNoOfObjectsSynced:numberOfObjectsSynced];
                     
                 }
                 
@@ -267,17 +257,8 @@
                 
                 if(numberOfObjectsSynced == objectsToCreate.count)
                 {
-                    /********** Applying Values to Multiple Hits********/
-                    
-                    /* Set the screen name on the tracker */
-                    [self.tracker set:kGAIScreenName value:@"Sync Process"];
-                    [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
-                    
-                    /********** Measuring Events**********/
-                    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Post %@ Objects To Server - Failure", className]
-                                                                               action:[NSString stringWithFormat:@"Time Taken-%f",[[NSDate date] timeIntervalSinceDate:startDate]]
-                                                                                label:[NSString stringWithFormat:@"No. Of objects Synced-%@",[NSNumber numberWithInt:numberOfObjectsSynced                                                                   ]]
-                                                                                value:nil] build]];
+                    ////
+                    [self postGoogleAnalytics:className withStatus:@"Failure." withStartDate:startDate withNoOfObjectsSynced:numberOfObjectsSynced];
                 }
 
                 
@@ -306,6 +287,11 @@
     
     dispatch_group_t group = dispatch_group_create();
     
+    NSDate *startDate = [NSDate date];
+    
+    int numberOfObjectsDeleted = 0;
+    
+    
     NSMutableArray *operations = [NSMutableArray array];
     
     for (NSString *className in self.registeredClassesToSync) {
@@ -319,16 +305,29 @@
         {
             dispatch_group_enter(group);
             
+            numberOfObjectsDeleted++;
             
             [[kSyncOperation sharedSyncOperationAPI] performDeleteOpertaionForObject:objectToDelete parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
                 
                 [operations addObject:operation];
+                
+                ////
+                if(numberOfObjectsDeleted == objectsToDelete.count)
+                {
+                    [self postGoogleAnalytics:className withStatus:@"Success" withStartDate:startDate withNoOfObjectsSynced:numberOfObjectsDeleted];
+                }
                 
                 dispatch_group_leave(group);
                 
             } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                 
                 [operations addObject:operation];
+                
+                ////
+                if(numberOfObjectsDeleted == objectsToDelete.count)
+                {
+                    [self postGoogleAnalytics:className withStatus:@"Failure." withStartDate:startDate withNoOfObjectsSynced:numberOfObjectsDeleted];
+                }
                 
                 dispatch_group_leave(group);
                 
@@ -355,6 +354,10 @@
 {
     dispatch_group_t group = dispatch_group_create();
     
+    NSDate *startDate = [NSDate date];
+    
+    int numberOfObjectsUpdated = 0;
+    
     NSMutableArray *operations = [NSMutableArray array];
     
     for (int i=0;i<self.registeredClassesToSync.count;i++) {
@@ -369,20 +372,33 @@
             
             dispatch_group_enter(group);
             
+            numberOfObjectsUpdated++;
+            
             Class objectClass = NSClassFromString(className);
             
             if([objectClass methodTypeForUpdateOperation] == kHTTPMethodTypeUNDEFINED)
             {
                 [[kSyncOperation sharedSyncOperationAPI] performPUTOperationForObject:objectToDelete parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
                     
-                    
                     [operations addObject:operation];
+                    
+                    ////
+                    if(numberOfObjectsUpdated == objectsToUpdate.count)
+                    {
+                     [self postGoogleAnalytics:className withStatus:@"Success" withStartDate:startDate withNoOfObjectsSynced:numberOfObjectsUpdated];
+                    }
                     
                     dispatch_group_leave(group);
                     
                 } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                     
                     [operations addObject:operation];
+                    
+                    ////
+                    if(numberOfObjectsUpdated == objectsToUpdate.count)
+                    {
+                    [self postGoogleAnalytics:className withStatus:@"Failure." withStartDate:startDate withNoOfObjectsSynced:numberOfObjectsUpdated];
+                    }
                     
                     dispatch_group_leave(group);
                     
@@ -396,11 +412,23 @@
                     
                     [operations addObject:operation];
                     
+                    ////
+                    if(numberOfObjectsUpdated == objectsToUpdate.count)
+                    {
+                     [self postGoogleAnalytics:className withStatus:@"Success" withStartDate:startDate withNoOfObjectsSynced:numberOfObjectsUpdated];
+                    }
+                    
                     dispatch_group_leave(group);
                     
                 } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                     
                     [operations addObject:operation];
+                    
+                    ////
+                    if(numberOfObjectsUpdated == objectsToUpdate.count)
+                    {
+                     [self postGoogleAnalytics:className withStatus:@"Failure." withStartDate:startDate withNoOfObjectsSynced:numberOfObjectsUpdated];
+                    }
                     
                     dispatch_group_leave(group);
                     
@@ -842,5 +870,22 @@ forManagedObject:(NSManagedObject *)managedObject {
 }
 
 #pragma mark ResolveConflictedObjects
+
+#pragma mark GooGleAnalyticsMethods
+
+-(void)postGoogleAnalytics:(NSString*)className withStatus:(NSString*)status withStartDate:(NSDate*)startDate withNoOfObjectsSynced:(int)numberOfObjectsSynced
+{
+    /********** Applying Values to Multiple Hits********/
+    
+    /* Set the screen name on the tracker */
+    [self.tracker set:kGAIScreenName value:@"Sync Process"];
+    [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
+    /********** Measuring Events**********/
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Post %@ Objects To Server - %@", className,status]
+                                                               action:[NSString stringWithFormat:@"Time Taken-%f",[[NSDate date] timeIntervalSinceDate:startDate]]
+                                                                label:[NSString stringWithFormat:@"No. Of objects Synced-%@",[NSNumber numberWithInt:numberOfObjectsSynced                                                                   ]]
+                                                                value:nil] build]];
+}
 
 @end
