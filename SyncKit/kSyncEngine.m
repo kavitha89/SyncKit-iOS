@@ -250,7 +250,7 @@
                     [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
                     
                     /********** Measuring Events**********/
-                    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Post %@ Objects To Server - Failure", className]
+                    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Post %@ Objects To Server - Success", className]
                                                                                action:[NSString stringWithFormat:@"Time Taken-%f",[[NSDate date] timeIntervalSinceDate:startDate]]
                                                                                 label:[NSString stringWithFormat:@"No. Of objects Synced-%@",[NSNumber numberWithInt:numberOfObjectsSynced                                                                   ]]
                                                                                 value:nil] build]];
