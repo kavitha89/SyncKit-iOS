@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ModelSelectionTableViewController : UITableViewController
+@interface ModelSelectionTableViewController : GAITrackedViewController
 
 @end

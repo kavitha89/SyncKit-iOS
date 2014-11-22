@@ -15,11 +15,18 @@
 #import <objc/runtime.h>
 #import "kSyncConstants.h"
 #import "kSyncKit.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface kSyncEngine()
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) dispatch_queue_t backgroundSyncQueue;
+@property (nonatomic, assign) int numberOfObjectsSynced;
+@property (nonatomic, strong) NSDate *syncStartDate;
+@property (nonatomic, strong) NSDate *syncEndDate;
+@property (nonatomic, strong) id<GAITracker> tracker;
+
 
 @end
 
@@ -47,6 +54,8 @@
         
         self.backgroundSyncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
         
+        self.tracker = [[GAI sharedInstance] defaultTracker];
+        
         dispatch_async(self.backgroundSyncQueue, ^{
             
             [self downloadDataForRegisteredObjects];
@@ -57,7 +66,7 @@
 
 - (void)downloadDataForRegisteredObjects
 {
-   dispatch_group_t group = dispatch_group_create();
+    dispatch_group_t group = dispatch_group_create();
     
     for(NSString *className in self.registeredClassesToSync)
     {
@@ -81,7 +90,7 @@
                     
                 }];
             });
-
+            
         }
         /**
          *  This is delta fetch operation, done during every sync.
@@ -115,7 +124,7 @@
                 
             }];
             
-
+            
         }
         
     }
@@ -126,73 +135,73 @@
     });
     
     
-//    for(NSString *className in self.registeredClassesToSync)
-//    {
-//    /**
-//         *  This is fetch all opertaion, done during the first time sync for all managed objects
-//         */
-//        if ([self isFirstTimeSyncForManagedObjectClass:className])
-//            {
-//            //do fetch all
-//            //[self doFetchAllCallForManagedObjectClass:className];
-//                
-//                dispatch_group_t group = dispatch_group_create();
-//                
-//                dispatch_group_enter(group);
-//                
-//                [[kSyncOperation sharedSyncOperationAPI] performFetchAllRequestForClass:className parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
-//                    
-//                    dispatch_group_leave(group);
-//                    
-//                } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-//                    dispatch_group_leave(group);
-//                    
-//                }];
-//                dispatch_group_notify(group, self.backgroundSyncQueue, ^{
-//                    NSLog(@"SynKit doFetchAllCallForManagedObjectClass operations completed");
-//                    [self postAllDirtyRecordsToServer];
-//                });
-//
-//        }
-//        /**
-//         *  This is delta fetch operation, done during every sync.
-//         */
-//        else
-//        {
-//            /*if([NSClassFromString(className) respondsToSelector:K_MODEL_URL_FOR_GET_SERVER_DELETED_OBJECTS])
-//            {
-//                if (![NSClassFromString(className) URLToGetDeletedRecordsFromServer]) {
-//                    // do fetch all if there is no special service that returns all deleted objects, OK??
-//                    [self doFetchAllCallForManagedObjectClass:className];
-//                    return;
-//                }
-//            }*/
-//
-//            //do delta fetch
-//            //[self doDeltaFetchForManagedObjectClass:className];
-//            
-//            dispatch_group_t group = dispatch_group_create();
-//            
-//            dispatch_group_enter(group);
-//            
-//            NSDate *mostRecentUpdatedDate = [self mostRecentUpdatedAtDateForEntityWithName:className];
-//            
-//            [[kSyncOperation sharedSyncOperationAPI] performFetchAllRecordsOperationOfClass:className updatedAfterDate:mostRecentUpdatedDate success:^(RKObjectRequestOperation *operation, id responseObject) {
-//                
-//                    dispatch_group_leave(group);
-//                
-//            } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-//                    dispatch_group_leave(group);
-//                
-//            }];
-//            
-//            dispatch_group_notify(group, self.backgroundSyncQueue, ^{
-//                NSLog(@"SynKit doDeltaFetchForManagedObjectClass operations completed");
-//                [self postAllDirtyRecordsToServer];
-//            });
-//        }
-//        
-//    }
+    //    for(NSString *className in self.registeredClassesToSync)
+    //    {
+    //    /**
+    //         *  This is fetch all opertaion, done during the first time sync for all managed objects
+    //         */
+    //        if ([self isFirstTimeSyncForManagedObjectClass:className])
+    //            {
+    //            //do fetch all
+    //            //[self doFetchAllCallForManagedObjectClass:className];
+    //
+    //                dispatch_group_t group = dispatch_group_create();
+    //
+    //                dispatch_group_enter(group);
+    //
+    //                [[kSyncOperation sharedSyncOperationAPI] performFetchAllRequestForClass:className parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
+    //
+    //                    dispatch_group_leave(group);
+    //
+    //                } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+    //                    dispatch_group_leave(group);
+    //
+    //                }];
+    //                dispatch_group_notify(group, self.backgroundSyncQueue, ^{
+    //                    NSLog(@"SynKit doFetchAllCallForManagedObjectClass operations completed");
+    //                    [self postAllDirtyRecordsToServer];
+    //                });
+    //
+    //        }
+    //        /**
+    //         *  This is delta fetch operation, done during every sync.
+    //         */
+    //        else
+    //        {
+    //            /*if([NSClassFromString(className) respondsToSelector:K_MODEL_URL_FOR_GET_SERVER_DELETED_OBJECTS])
+    //            {
+    //                if (![NSClassFromString(className) URLToGetDeletedRecordsFromServer]) {
+    //                    // do fetch all if there is no special service that returns all deleted objects, OK??
+    //                    [self doFetchAllCallForManagedObjectClass:className];
+    //                    return;
+    //                }
+    //            }*/
+    //
+    //            //do delta fetch
+    //            //[self doDeltaFetchForManagedObjectClass:className];
+    //
+    //            dispatch_group_t group = dispatch_group_create();
+    //
+    //            dispatch_group_enter(group);
+    //
+    //            NSDate *mostRecentUpdatedDate = [self mostRecentUpdatedAtDateForEntityWithName:className];
+    //
+    //            [[kSyncOperation sharedSyncOperationAPI] performFetchAllRecordsOperationOfClass:className updatedAfterDate:mostRecentUpdatedDate success:^(RKObjectRequestOperation *operation, id responseObject) {
+    //
+    //                    dispatch_group_leave(group);
+    //
+    //            } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+    //                    dispatch_group_leave(group);
+    //
+    //            }];
+    //
+    //            dispatch_group_notify(group, self.backgroundSyncQueue, ^{
+    //                NSLog(@"SynKit doDeltaFetchForManagedObjectClass operations completed");
+    //                [self postAllDirtyRecordsToServer];
+    //            });
+    //        }
+    //
+    //    }
 }
 
 - (void)doFetchAllCallForManagedObjectClass:(NSString *)className
@@ -202,7 +211,7 @@
 
 - (void)doDeltaFetchForManagedObjectClass:(NSString *)className
 {
-  
+    
 }
 
 - (void)postLocalObjectsToServer {
@@ -213,30 +222,72 @@
     
     for (NSString *className in self.registeredClassesToSync) {
         
+        NSDate *startDate = [NSDate date];
+        
+        int numberOfObjectsSynced = 0;
+        
         NSArray *objectsToCreate = [self managedObjectsForClass:className withSyncStatus:kObjectCreated];
         
         NSLog(@"SynKit found %lu objects of class %@ to be created at server",(unsigned long)objectsToCreate.count,className);
+        
         
         for(NSManagedObject *objectToCreate in objectsToCreate)
         {
             dispatch_group_enter(group);
             
+            numberOfObjectsSynced++;
+            
             [[kSyncOperation sharedSyncOperationAPI]  performPOSTRequestForObject:objectToCreate parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
                 
                 [operations addObject:operation];
-
+                
+                if(numberOfObjectsSynced == objectsToCreate.count)
+                {
+                    /********** Applying Values to Multiple Hits********/
+                    
+                    /* Set the screen name on the tracker */
+                    [self.tracker set:kGAIScreenName value:@"Sync Process"];
+                    [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
+                    
+                    /********** Measuring Events**********/
+                    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Post %@ Objects To Server - Failure", className]
+                                                                               action:[NSString stringWithFormat:@"Time Taken-%f",[[NSDate date] timeIntervalSinceDate:startDate]]
+                                                                                label:[NSString stringWithFormat:@"No. Of objects Synced-%@",[NSNumber numberWithInt:numberOfObjectsSynced                                                                   ]]
+                                                                                value:nil] build]];
+                    
+                    
+                }
+                
                 dispatch_group_leave(group);
+                
                 
             } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                 
                 [operations addObject:operation];
+                
+                if(numberOfObjectsSynced == objectsToCreate.count)
+                {
+                    /********** Applying Values to Multiple Hits********/
+                    
+                    /* Set the screen name on the tracker */
+                    [self.tracker set:kGAIScreenName value:@"Sync Process"];
+                    [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
+                    
+                    /********** Measuring Events**********/
+                    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:[NSString stringWithFormat:@"Post %@ Objects To Server - Failure", className]
+                                                                               action:[NSString stringWithFormat:@"Time Taken-%f",[[NSDate date] timeIntervalSinceDate:startDate]]
+                                                                                label:[NSString stringWithFormat:@"No. Of objects Synced-%@",[NSNumber numberWithInt:numberOfObjectsSynced                                                                   ]]
+                                                                                value:nil] build]];
+                }
 
+                
                 dispatch_group_leave(group);
                 
                 
             }];
             
         }
+        
     }
     
     dispatch_group_notify(group, self.backgroundSyncQueue, ^{
@@ -272,14 +323,14 @@
             [[kSyncOperation sharedSyncOperationAPI] performDeleteOpertaionForObject:objectToDelete parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
                 
                 [operations addObject:operation];
-
-                    dispatch_group_leave(group);
+                
+                dispatch_group_leave(group);
                 
             } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                 
                 [operations addObject:operation];
-
-                    dispatch_group_leave(group);
+                
+                dispatch_group_leave(group);
                 
             }];
             
@@ -313,36 +364,18 @@
         NSArray *objectsToUpdate=[self fetchAllRecordsToBePostedForManagedObjectClass:className];
         
         NSLog(@"SynKit found %lu  dirty objects of class %@ to be updated at server",(unsigned long)objectsToUpdate.count,className);
-
+        
         for (NSManagedObject *objectToDelete in objectsToUpdate) {
-
+            
             dispatch_group_enter(group);
             
             Class objectClass = NSClassFromString(className);
             
             if([objectClass methodTypeForUpdateOperation] == kHTTPMethodTypeUNDEFINED)
             {
-            [[kSyncOperation sharedSyncOperationAPI] performPUTOperationForObject:objectToDelete parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
-                
-                
-                [operations addObject:operation];
-                
-                dispatch_group_leave(group);
-                
-            } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                
-                [operations addObject:operation];
-
-                    dispatch_group_leave(group);
-                
-            }];
-            }
-            else if([objectClass methodTypeForUpdateOperation] == kHTTPMethodTypePATCH)
-            {
-                [[kSyncOperation sharedSyncOperationAPI] performPATCHOperationForObject:objectToDelete parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
+                [[kSyncOperation sharedSyncOperationAPI] performPUTOperationForObject:objectToDelete parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
                     
-                    [objectToDelete markAsSynced];
-
+                    
                     [operations addObject:operation];
                     
                     dispatch_group_leave(group);
@@ -354,7 +387,25 @@
                     dispatch_group_leave(group);
                     
                 }];
-
+            }
+            else if([objectClass methodTypeForUpdateOperation] == kHTTPMethodTypePATCH)
+            {
+                [[kSyncOperation sharedSyncOperationAPI] performPATCHOperationForObject:objectToDelete parameters:nil success:^(RKObjectRequestOperation *operation, id responseObject) {
+                    
+                    [objectToDelete markAsSynced];
+                    
+                    [operations addObject:operation];
+                    
+                    dispatch_group_leave(group);
+                    
+                } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+                    
+                    [operations addObject:operation];
+                    
+                    dispatch_group_leave(group);
+                    
+                }];
+                
             }
             
             
@@ -462,9 +513,9 @@ forManagedObject:(NSManagedObject *)managedObject {
     __block NSArray *results=nil;
     NSManagedObjectContext *managedObjectContext = [[kCoreDataController sharedController] backgroundManagedObjectContext];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:className];
-
+    
     Class modelClass = NSClassFromString(className);
-
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K != %d",[modelClass syncStatusFlagAttribute], kObjectDeleted];
     [fetchRequest setPredicate:predicate];
     
@@ -474,7 +525,7 @@ forManagedObject:(NSManagedObject *)managedObject {
     }];
     
     return results;
-
+    
 }
 
 - (NSArray *)managedObjectsForClass:(NSString *)className withSyncStatus:(kObjectSyncStatus)syncStatus
@@ -487,7 +538,7 @@ forManagedObject:(NSManagedObject *)managedObject {
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %d",[modelClass syncStatusFlagAttribute] ,syncStatus];
     [fetchRequest setPredicate:predicate];
-
+    
     [managedObjectContext performBlockAndWait:^{
         NSError *error = nil;
         results = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -507,7 +558,7 @@ forManagedObject:(NSManagedObject *)managedObject {
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN %@",[modelClass syncStatusFlagAttribute], @[[NSNumber numberWithInt:kObjectClientAccept],[NSNumber numberWithInt:kObjectDirty],[NSNumber numberWithInt:kObjectClientConflictResolved]]];
     
-
+    
     [fetchRequest setPredicate:predicate];
     
     [managedObjectContext performBlockAndWait:^{
@@ -592,39 +643,39 @@ forManagedObject:(NSManagedObject *)managedObject {
                                                                                                                    ]
                                                                                                       statusCodes:RKStatusCodeIndexSetForClass (RKStatusCodeClassSuccessful)];
         
-      /* if([theClass respondsToSelector:K_MODEL_URL_FOR_GET_SERVER_DELETED_OBJECTS])
-        {
-            if (![theClass URLToGetDeletedRecordsFromServer]) {
-                
-                [objectManager addFetchRequestBlock:^NSFetchRequest *(NSURL *URL) {
-                    
-                    RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:[theClass performSelector:K_MODEL_URL_FOR_FETCH_METHOD_SELECTOR]];
-                    
-                    NSDictionary *argsDict = nil;
-                    
-                    BOOL match = [pathMatcher matchesPath:[URL relativePath] tokenizeQueryStrings:NO parsedArguments:&argsDict];
-                    
-                    if (match) {
-                        // Return  a fetch request telling the object manager which objects to compare the remote payload to so it can cleanup any orphaned objects.
-                        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-                        NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass(theClass) inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
-                        [fetchRequest setEntity:entity];
-                        NSPredicate *predicateForInnocentRecords = [NSPredicate predicateWithFormat:@"syncStatus IN %@", @[[NSNumber numberWithInt:kObjectSynced]]];
-                        [fetchRequest setPredicate:predicateForInnocentRecords];
-                        
-                        if([(NSManagedObject *)theClass respondsToSelector:K_MODEL_IDENTIFICATION_ATTRIBUTE_SELECTOR])
-                        {
-                            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[theClass performSelector:K_MODEL_IDENTIFICATION_ATTRIBUTE_SELECTOR] ascending:YES];
-                            NSArray *sortDescriptors = @[sortDescriptor];
-                            [fetchRequest setSortDescriptors:sortDescriptors];
-                        }
-                        return fetchRequest;
-                    } else {
-                        return nil;
-                    }
-                }];
-            }
-        }*/
+        /* if([theClass respondsToSelector:K_MODEL_URL_FOR_GET_SERVER_DELETED_OBJECTS])
+         {
+         if (![theClass URLToGetDeletedRecordsFromServer]) {
+         
+         [objectManager addFetchRequestBlock:^NSFetchRequest *(NSURL *URL) {
+         
+         RKPathMatcher *pathMatcher = [RKPathMatcher pathMatcherWithPattern:[theClass performSelector:K_MODEL_URL_FOR_FETCH_METHOD_SELECTOR]];
+         
+         NSDictionary *argsDict = nil;
+         
+         BOOL match = [pathMatcher matchesPath:[URL relativePath] tokenizeQueryStrings:NO parsedArguments:&argsDict];
+         
+         if (match) {
+         // Return  a fetch request telling the object manager which objects to compare the remote payload to so it can cleanup any orphaned objects.
+         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+         NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass(theClass) inManagedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext];
+         [fetchRequest setEntity:entity];
+         NSPredicate *predicateForInnocentRecords = [NSPredicate predicateWithFormat:@"syncStatus IN %@", @[[NSNumber numberWithInt:kObjectSynced]]];
+         [fetchRequest setPredicate:predicateForInnocentRecords];
+         
+         if([(NSManagedObject *)theClass respondsToSelector:K_MODEL_IDENTIFICATION_ATTRIBUTE_SELECTOR])
+         {
+         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[theClass performSelector:K_MODEL_IDENTIFICATION_ATTRIBUTE_SELECTOR] ascending:YES];
+         NSArray *sortDescriptors = @[sortDescriptor];
+         [fetchRequest setSortDescriptors:sortDescriptors];
+         }
+         return fetchRequest;
+         } else {
+         return nil;
+         }
+         }];
+         }
+         }*/
         
         [objectManager addResponseDescriptor:responseDescriptorForFetchAll];
     }

@@ -13,6 +13,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //Google Analytics
+    
+    // 1
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // 2
+    [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
+    
+    // 3
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // 4
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-57002061-1"];
+    
+    /********** Sampling Rate **********/
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+    [tracker set:kGAIAppVersion value:version];
+    [tracker set:kGAISampleRate value:@"50.0"]; // sampling rate of 50%
     // Override point for customization after application launch.
     return YES;
 }

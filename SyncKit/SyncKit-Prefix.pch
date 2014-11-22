@@ -17,5 +17,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreData/CoreData.h>
 #import "kSyncConstants.h"
+#import "GAI.h"
+#import "GAIFields.h"
 
 #endif

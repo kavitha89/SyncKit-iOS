@@ -22,25 +22,20 @@
 }
 
 @property (strong, nonatomic) UIActivityIndicatorView *syncInProgressIndicator;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation ModelSelectionTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = @"Registered Models";
+    
+    self.screenName = @"Sync Process";
     
     [self initializeSyncKit];
     
@@ -51,7 +46,7 @@
     [self.view addSubview:self.syncInProgressIndicator];
     [self.view bringSubviewToFront:self.syncInProgressIndicator];
     
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
     
     UIBarButtonItem *syncButton  = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(syncButtonPressed)];
     [self.navigationItem setLeftBarButtonItem:syncButton];
