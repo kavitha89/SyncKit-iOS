@@ -1,27 +1,399 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="gGp-st-GVx">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Model Selection Table View Controller-->
+        <scene sceneID="7Zo-NN-zqe">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="JambulViewController" sceneMemberID="viewController">
+                <viewController id="boy-15-NGu" customClass="ModelSelectionTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="l5l-gB-tJJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="mBW-KR-uKE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="SiJ-4q-ZbA">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="TXB-2h-dmz">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="modelCell" id="um6-qD-zyI">
+                                        <rect key="frame" x="0.0" y="86" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="um6-qD-zyI" id="TdO-N6-bUe">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="boy-15-NGu" id="fgt-e6-0J3"/>
+                                    <outlet property="delegate" destination="boy-15-NGu" id="fWS-hz-VDf"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="bxn-Bq-GdN"/>
+                    <connections>
+                        <outlet property="tableView" destination="TXB-2h-dmz" id="BgL-2Q-5pE"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jJV-8p-xG6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-139" y="-163"/>
+        </scene>
+        <!--Turbine List View Controller-->
+        <scene sceneID="Lqy-d7-yBi">
+            <objects>
+                <tableViewController storyboardIdentifier="TurbineListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BuA-ys-3HO" customClass="TurbineListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AzB-pj-4xw">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kq6-4e-06C">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kq6-4e-06C" id="CYC-gO-xzm">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BuA-ys-3HO" id="zYD-sf-IqH"/>
+                            <outlet property="delegate" destination="BuA-ys-3HO" id="659-h7-5E3"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="8hz-SY-h1U" kind="push" identifier="turbineDetails" id="vTB-s3-xqA"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aFi-ln-gaN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="311" y="2064"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vge-O3-79N">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="gGp-st-GVx" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dvS-Ql-tWe">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="boy-15-NGu" kind="relationship" relationship="rootViewController" id="JB2-cm-9rH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YvC-6Z-Eyh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-525" y="-163"/>
+        </scene>
+        <!--Turbine Add Edit View Controller-->
+        <scene sceneID="eyi-Ec-6iC">
+            <objects>
+                <viewController storyboardIdentifier="TurbineAddEditViewController" id="8hz-SY-h1U" customClass="TurbineAddEditViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7mc-ab-HGq"/>
+                        <viewControllerLayoutGuide type="bottom" id="sak-Dl-N24"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hrH-ar-xPW">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ivq-5K-qeh">
+                                <rect key="frame" x="0.0" y="228" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="8hz-SY-h1U" id="oqQ-GO-nS4"/>
+                                    <outlet property="delegate" destination="8hz-SY-h1U" id="KGo-Gd-wOU"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FMD-5h-H13">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="qZe-f5-Yrm">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="8hz-SY-h1U" id="dKN-kK-4ys"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hKk-c5-CDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="748" y="2064"/>
+        </scene>
+        <!--JambulSettingsViewController-->
+        <scene sceneID="qbg-PT-VhP">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="pQ0-Cc-bKZ" userLabel="JambulSettingsViewController" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XMM-40-4G8"/>
+                        <viewControllerLayoutGuide type="bottom" id="YZl-iv-SpA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dzC-d7-RML">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMt-LC-9H0" customClass="RadioButton">
+                                <rect key="frame" x="70" y="266" width="167" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="2" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Server Wins" image="unchecked.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="checked.png">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onRadioBtn:" destination="pQ0-Cc-bKZ" eventType="touchUpInside" id="z8a-Z8-Coo"/>
+                                    <outletCollection property="groupButtons" destination="rAX-nf-ube" id="boj-TQ-Ezf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAX-nf-ube" customClass="RadioButton">
+                                <rect key="frame" x="70" y="343" width="160" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="2" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Client Wins" image="unchecked.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="checked.png">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onRadioBtn:" destination="pQ0-Cc-bKZ" eventType="touchUpInside" id="9dX-S6-geI"/>
+                                    <outletCollection property="groupButtons" destination="XWZ-wd-Vop" id="p0c-FL-n94"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CONFLICT RESOLUTION TYPE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dr8-lU-8N4">
+                                <rect key="frame" x="20" y="186" width="248" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWZ-wd-Vop" customClass="RadioButton">
+                                <rect key="frame" x="70" y="419" width="195" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="2" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Custom Merge Wins" image="unchecked.png">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="checked.png">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onRadioBtn:" destination="pQ0-Cc-bKZ" eventType="touchUpInside" id="Bbn-Gc-IZN"/>
+                                    <outletCollection property="groupButtons" destination="iMt-LC-9H0" id="VbT-bX-MzV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNJ-UJ-Ceg" customClass="RadioButton">
+                                <rect key="frame" x="70" y="500" width="195" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="2" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Most Recent Wins" image="unchecked.png">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="checked.png">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="clientRadioButton" destination="rAX-nf-ube" id="t9q-Dt-h07"/>
+                        <outlet property="customMergeButton" destination="XWZ-wd-Vop" id="qpC-CO-ca6"/>
+                        <outlet property="mostRecentWinsButton" destination="hNJ-UJ-Ceg" id="Pr1-JQ-ai1"/>
+                        <outlet property="serverRadioButton" destination="iMt-LC-9H0" id="nYm-hh-ja5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YD1-tt-8AM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-132" y="634"/>
+        </scene>
+        <!--Pipe Add Edit View Controller-->
+        <scene sceneID="cuU-Ak-Xhg">
+            <objects>
+                <viewController storyboardIdentifier="PipeAddEditViewController" id="ktE-hT-ujm" customClass="PipeAddEditViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BVH-yD-KWb"/>
+                        <viewControllerLayoutGuide type="bottom" id="KJz-Ks-K78"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rGM-ew-mMA">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="1dH-Qx-FJ4">
+                                <rect key="frame" x="0.0" y="228" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ktE-hT-ujm" id="i41-HO-qHY"/>
+                                    <outlet property="delegate" destination="ktE-hT-ujm" id="tA1-CC-ZBH"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Rxn-MN-rMS">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="21L-HU-Izk">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="ktE-hT-ujm" id="Qf3-3u-szZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ERv-gV-Pwc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="725" y="550"/>
+        </scene>
+        <!--Transfomer List View Controller-->
+        <scene sceneID="f7z-xZ-Sy8">
+            <objects>
+                <tableViewController storyboardIdentifier="TransfomerListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZzG-vf-7EK" customClass="TransfomerListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JTh-EC-Buf">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="nUc-f5-Y9X">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nUc-f5-Y9X" id="wys-mT-RcI">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZzG-vf-7EK" id="UH8-6j-ggp"/>
+                            <outlet property="delegate" destination="ZzG-vf-7EK" id="abU-pw-dzz"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="QKL-T7-hcN" kind="push" identifier="transformerDetails" id="jid-Bi-dLn"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ei7-0G-vy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="319" y="1368"/>
+        </scene>
+        <!--Transfomer Add Edit View Controller-->
+        <scene sceneID="EXR-0q-2SR">
+            <objects>
+                <viewController storyboardIdentifier="TransfomerAddEditViewController" id="QKL-T7-hcN" customClass="TransfomerAddEditViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g6Y-wP-kZJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="U1f-BI-f5w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SeP-fq-Vql">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ffq-3e-rt6">
+                                <rect key="frame" x="0.0" y="228" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="QKL-T7-hcN" id="IcC-cW-GQ2"/>
+                                    <outlet property="delegate" destination="QKL-T7-hcN" id="ViS-fB-k68"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Wrb-KX-mdw">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="6pA-8w-nIg">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="QKL-T7-hcN" id="3P4-Dp-sf3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="reV-sh-Dem" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="748" y="1368"/>
+        </scene>
+        <!--JambulViewController-->
+        <scene sceneID="lbl-yi-8dd">
+            <objects>
+                <tableViewController storyboardIdentifier="BoilerListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rz5-fP-LDo" userLabel="JambulViewController" customClass="BoilerListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wIS-o4-Z6e">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="rz5-fP-LDo" id="jZn-Cd-6Jf"/>
+                            <outlet property="delegate" destination="rz5-fP-LDo" id="Qkc-Qi-vMB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Wji-qg-zn8"/>
+                    <connections>
+                        <segue destination="ETU-En-ECu" kind="push" identifier="addNewsItem" id="7VL-dW-nAl"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AbE-ua-Ktq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="319" y="-168"/>
+        </scene>
+        <!--Boiler Add Edit View Contoller-->
+        <scene sceneID="Jvf-FA-EcC">
+            <objects>
+                <viewController id="ETU-En-ECu" customClass="BoilerAddEditViewContoller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kmW-SG-Ai3"/>
+                        <viewControllerLayoutGuide type="bottom" id="pyf-To-6eN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1rt-Q3-Arg">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="AeL-iF-kUn">
+                                <rect key="frame" x="0.0" y="228" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ETU-En-ECu" id="z1V-g3-mhl"/>
+                                    <outlet property="delegate" destination="ETU-En-ECu" id="seT-oT-8lz"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Fa-Qb-ZNH">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ost-zy-elf">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="ETU-En-ECu" id="qw5-cr-X8N"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CRy-VP-pW3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="725" y="-168"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="checked.png" width="24" height="24"/>
+        <image name="unchecked.png" width="24" height="24"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

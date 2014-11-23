@@ -58,7 +58,7 @@
 
 -(void)animateTextField:(UITextField*)textField up:(BOOL)up
 {
-    const int movementDistance = -250; // tweak as needed
+    const int movementDistance = -175; // tweak as needed
     const float movementDuration = 0.3f; // tweak as needed
     
     int movement = (up ? movementDistance : -movementDistance);
@@ -231,7 +231,23 @@
 	tf.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
 	return tf ;
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    /* should move views */
+   /* self.view.center = CGPointMake(self.view.center.x, self.view.center.y + 220);*/
+    
+   // if(textField.)
+    
+    [self animateTextField:textField up:YES];
+}
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    /* should move views */
+    [self animateTextField:textField up:NO];
+
+    
+}
 // Workaround to hide keyboard when Done is tapped
 - (IBAction)textFieldFinished:(id)sender {
     // [sender resignFirstResponder];
