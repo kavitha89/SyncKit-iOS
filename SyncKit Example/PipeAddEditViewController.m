@@ -227,7 +227,21 @@
 	tf.textColor = [UIColor colorWithRed:56.0f/255.0f green:84.0f/255.0f blue:135.0f/255.0f alpha:1.0f];
 	return tf ;
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    /* should move views */
+    /* self.view.center = CGPointMake(self.view.center.x, self.view.center.y + 220);*/
+    
+    // if(textField.)
+    
+    [self animateTextField:textField up:YES];
+}
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    /* should move views */
+    [self animateTextField:textField up:NO];
+}
 // Workaround to hide keyboard when Done is tapped
 - (IBAction)textFieldFinished:(id)sender {
     // [sender resignFirstResponder];
