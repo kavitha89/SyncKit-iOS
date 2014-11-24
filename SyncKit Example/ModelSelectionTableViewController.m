@@ -213,30 +213,30 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[syncKit.syncEngine.registeredClassesToSync objectAtIndex:indexPath.row] isEqualToString:@"Boiler"]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        BoilerListViewController *settingVC = [storyboard instantiateViewControllerWithIdentifier:@"BoilerListViewController"];
+        //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        BoilerListViewController *settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"BoilerListViewController"];
         [self.navigationController pushViewController:settingVC animated:YES];
         
     }
     
     else if ([[syncKit.syncEngine.registeredClassesToSync objectAtIndex:indexPath.row] isEqualToString:@"Pipe"])
     {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        PipesListViewController *settingVC = [storyboard instantiateViewControllerWithIdentifier:@"PipesListViewController"];
+        //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        PipesListViewController *settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"PipesListViewController"];
         [self.navigationController pushViewController:settingVC animated:YES];
     }
     
     else if ([[syncKit.syncEngine.registeredClassesToSync objectAtIndex:indexPath.row] isEqualToString:@"Transformer"])
     {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        TransfomerListViewController *settingVC = [storyboard instantiateViewControllerWithIdentifier:@"TransfomerListViewController"];
+        //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        TransfomerListViewController *settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TransfomerListViewController"];
         [self.navigationController pushViewController:settingVC animated:YES];
     }
     
     else if ([[syncKit.syncEngine.registeredClassesToSync objectAtIndex:indexPath.row] isEqualToString:@"Turbine"])
     {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-        TurbineListViewController *settingVC = [storyboard instantiateViewControllerWithIdentifier:@"TurbineListViewController"];
+        //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
+        TurbineListViewController *settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TurbineListViewController"];
         [self.navigationController pushViewController:settingVC animated:YES];
     }
     

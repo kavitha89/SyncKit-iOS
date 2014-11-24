@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		280571A71977A61200F85209 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 280571A61977A61200F85209 /* RadioButton.m */; };
 		280571AA1977A68B00F85209 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280571A91977A68B00F85209 /* SettingsViewController.m */; };
+		84868A841A23181300A1A850 /* dataSharingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84868A831A23181300A1A850 /* dataSharingViewController.m */; };
 		84AE959C1A1107AD00B30539 /* NSManagedObject+kSyncKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE95991A1107AD00B30539 /* NSManagedObject+kSyncKit.m */; };
 		84AE959D1A1107AD00B30539 /* NSObject+kSyncKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE959B1A1107AD00B30539 /* NSObject+kSyncKit.m */; };
 		84B0E7B51A0E3F3D0033921A /* SyncKitParameters-BoilerPlant.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84B0E7B41A0E3F3D0033921A /* SyncKitParameters-BoilerPlant.plist */; };
@@ -147,6 +148,8 @@
 		280571A91977A68B00F85209 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		28FC9FB5199254AA00567D36 /* PipeAddEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeAddEditViewController.h; sourceTree = "<group>"; };
 		28FC9FB6199254AA00567D36 /* PipeAddEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PipeAddEditViewController.m; sourceTree = "<group>"; };
+		84868A821A23181300A1A850 /* dataSharingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dataSharingViewController.h; sourceTree = "<group>"; };
+		84868A831A23181300A1A850 /* dataSharingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dataSharingViewController.m; sourceTree = "<group>"; };
 		84AE95971A11072300B30539 /* kSyncConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kSyncConstants.h; sourceTree = "<group>"; };
 		84AE95981A1107AD00B30539 /* NSManagedObject+kSyncKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+kSyncKit.h"; sourceTree = "<group>"; };
 		84AE95991A1107AD00B30539 /* NSManagedObject+kSyncKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+kSyncKit.m"; sourceTree = "<group>"; };
@@ -447,6 +450,8 @@
 				84B0E7BA1A0E40B10033921A /* Transformer.m */,
 				84B0E7B61A0E40B00033921A /* Boiler.h */,
 				84B0E7B71A0E40B00033921A /* Boiler.m */,
+				84868A821A23181300A1A850 /* dataSharingViewController.h */,
+				84868A831A23181300A1A850 /* dataSharingViewController.m */,
 			);
 			path = "SyncKit Example";
 			sourceTree = "<group>";
@@ -659,6 +664,7 @@
 				A5FDEB35195C406C003D1679 /* kSyncOperation.m in Sources */,
 				A5FDEB33195C406C003D1679 /* kSyncEngine.m in Sources */,
 				A5BB46E119912D2700F95FF1 /* ModelSelectionTableViewController.m in Sources */,
+				84868A841A23181300A1A850 /* dataSharingViewController.m in Sources */,
 				8E666AE21A0F90D200ADD144 /* TurbineListViewController.m in Sources */,
 				A5FDEB38195C406C003D1679 /* kCoreDataController.m in Sources */,
 				84B0E7BB1A0E40B10033921A /* Transformer.m in Sources */,

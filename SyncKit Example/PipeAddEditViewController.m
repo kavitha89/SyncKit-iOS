@@ -9,7 +9,7 @@
 #import "PipeAddEditViewController.h"
 #import "kCoreDataController.h"
 
-@interface PipeAddEditViewController ()<UITextFieldDelegate>
+@interface PipeAddEditViewController ()<UITextFieldDelegate,UIActionSheetDelegate>
 {
     
     UITextField * pDiameterField;
@@ -40,8 +40,13 @@
 {
     [super viewDidLoad];
        
-
     self.title = @"Pipe Details";
+    
+    UIBarButtonItem *saveButton  = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed:)];
+    
+    UIBarButtonItem *shareButton  = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareButtonPressed:)];
+    
+    [self.navigationItem setRightBarButtonItems:[[NSArray alloc]initWithObjects:saveButton,shareButton,nil]];
 
 }
 
@@ -109,7 +114,6 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -247,6 +251,44 @@
     // [sender resignFirstResponder];
 }
 
+#pragma mark UIActionSheetController methods for Sharing between apps.
+
+-(void)shareButtonPressed:(id)sender
+{
+    
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
+                            @"URL Scheme",
+                            @"Keychain",
+                            @"PasteBoard",
+                            @"ActivityViewController",
+                            nil];
+    popup.tag = 1;
+    [popup showInView:[UIApplication sharedApplication].keyWindow];
+    
+}
+
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (popup.tag) {
+        case 1: {
+            switch (buttonIndex) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 /*
 #pragma mark - Navigation
