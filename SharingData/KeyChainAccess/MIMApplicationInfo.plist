@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Team_ID</key>
+	<string>83V2E9A9E2.*</string>
+	<key>LDAP_Required</key>
+	<string>NO</string>
+	<key>LDAP_URL</key>
+	<string>LDAP://10.242.235.39</string>
+	<key>Domains</key>
+	<array>
+		<string></string>
+	</array>
+</dict>
+</plist>
