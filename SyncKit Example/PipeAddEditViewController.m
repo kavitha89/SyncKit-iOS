@@ -273,12 +273,19 @@
         case 1: {
             switch (buttonIndex) {
                 case 0:
+                    [self callViaURIScheme];
                     break;
                 case 1:
                     break;
                 case 2:
+                {
+                    [self storeintoPasteBoard];
+                    
+                }
                     break;
                 case 3:
+                    
+                    [self shareViaActivityViewControllerMethod];
                     break;
                 default:
                     break;
@@ -288,6 +295,84 @@
         default:
             break;
     }
+}
+
+-(void)callViaURIScheme
+{
+    NSMutableDictionary *boilerData = [NSMutableDictionary dictionaryWithDictionary:[self.pipeObject committedValuesForKeys:nil]];
+    
+    [boilerData removeObjectsForKeys:@[@"lastServerSyncDate",@"lastUpdatedDate"]];
+    
+    NSError *theError;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:boilerData options:NSJSONWritingPrettyPrinted error:&theError];
+    
+    //NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSString * text =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *newText = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    newText = [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    NSString *trimmedString = [newText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    
+    //NSString *jsonString = [NSString stringWithFormat:@"%@",jsonData];
+    
+    //jsonString = [jsonString substringFromIndex:1];
+    
+    //jsonString = [jsonString substringToIndex:[jsonString length] - 1];
+    
+    NSString *piggyBackString = [NSString stringWithFormat:@"sharedapp://%@",trimmedString];
+    
+    piggyBackString = [piggyBackString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:piggyBackString]];
+}
+
+#define PASTE_BOARD_NAME @"mypasteboard"
+#define PASTE_BOARD_TYPE @"mydata"
+
+#pragma mark UIPasteBoard methods.
+
+-(void)storeintoPasteBoard
+{
+    
+    NSMutableDictionary *boilerData = [NSMutableDictionary dictionaryWithDictionary:[self.pipeObject committedValuesForKeys:nil]];
+    
+    [boilerData removeObjectsForKeys:@[@"lastServerSyncDate",@"lastUpdatedDate"]];
+    
+    NSError *theError;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:boilerData options:NSJSONWritingPrettyPrinted error:&theError];
+    
+    UIPasteboard * pasteboard=[UIPasteboard generalPasteboard];
+    [pasteboard setData:jsonData forPasteboardType:@"MyPasteBoardSpaces"];
+    
+}
+-(void)shareViaActivityViewControllerMethod
+{
+    /* NSString *textToShare = @"Look at this awesome website for aspiring iOS Developers!";
+     NSURL *myWebsite = [NSURL URLWithString:@"http://www.codingexplorer.com/"];*/
+    
+    NSMutableDictionary *boilerData = [NSMutableDictionary dictionaryWithDictionary:[self.pipeObject committedValuesForKeys:nil]];
+    
+    [boilerData removeObjectsForKeys:@[@"lastServerSyncDate",@"lastUpdatedDate"]];
+    
+    NSArray *objectsToShare = @[boilerData];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[//UIActivityTypeAirDrop,
+                                   //UIActivityTypePrint,
+                                   //UIActivityTypeAssignToContact,
+                                   //UIActivityTypeSaveToCameraRoll,
+                                   //UIActivityTypeAddToReadingList,
+                                   //UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
 }
 
 /*

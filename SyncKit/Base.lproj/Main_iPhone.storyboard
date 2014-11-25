@@ -268,28 +268,12 @@
                                     <outletCollection property="groupButtons" destination="p8V-mq-MQL" id="5Jb-RZ-pHm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQ4-lS-ydt" customClass="RadioButton">
-                                <rect key="frame" x="70" y="272" width="195" height="24"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
-                                <inset key="titleEdgeInsets" minX="6" minY="2" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Most Recent Wins" image="unchecked.png">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected" image="checked.png">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="clientRadioButton" destination="cDu-ZX-z6f" id="ejq-yb-xTQ"/>
                         <outlet property="customMergeButton" destination="izc-To-MGB" id="5cV-CC-JGS"/>
-                        <outlet property="mostRecentWinsButton" destination="RQ4-lS-ydt" id="t18-E7-nui"/>
                         <outlet property="serverRadioButton" destination="p8V-mq-MQL" id="XVA-lr-RpH"/>
                     </connections>
                 </viewController>

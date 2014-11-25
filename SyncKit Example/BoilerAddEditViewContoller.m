@@ -8,7 +8,6 @@
 
 #import "BoilerAddEditViewContoller.h"
 #import "kCoreDataController.h"
-//#import "KeychainAppManager.h"
 
 @interface BoilerAddEditViewContoller ()<UITextFieldDelegate,UIActionSheetDelegate>
 {
@@ -285,12 +284,9 @@ popup.tag = 1;
                     [self callViaURIScheme];
                     break;
                 case 1:
-                    [self storeIntoKeychain];
                     break;
                 case 2:
                 {
-                    NSDictionary *dict = @{@"1":@"one",@"2":@"two"};
-                    [self storeDataToPasteBoardFromSyncKitAppl:dict];
                     [self storeintoPasteBoard];
                     
                 }
@@ -320,15 +316,25 @@ popup.tag = 1;
     
     //NSString *jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    NSString *jsonString = [NSString stringWithFormat:@"%@",jsonData];
+    NSString * text =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+    NSString *newText = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+    newText = [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     
-    jsonString = [jsonString substringFromIndex:1];
+    NSString *trimmedString = [newText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+
+    //NSString *jsonString = [NSString stringWithFormat:@"%@",jsonData];
     
-    jsonString = [jsonString substringToIndex:[jsonString length] - 1];
+    //jsonString = [jsonString substringFromIndex:1];
     
-    NSString *piggyBackString = [NSString stringWithFormat:@"sharedapp://%@",jsonData];
+    //jsonString = [jsonString substringToIndex:[jsonString length] - 1];
+    
+    NSString *piggyBackString = [NSString stringWithFormat:@"sharedapp://%@",trimmedString];
     
     piggyBackString = [piggyBackString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+   
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:piggyBackString]];
 }
 
@@ -339,69 +345,28 @@ popup.tag = 1;
 
 -(void)storeintoPasteBoard
 {
-    //Method 1
-    NSString * text=@"Kavi";
+    
+    NSMutableDictionary *boilerData = [NSMutableDictionary dictionaryWithDictionary:[self.boilerObject committedValuesForKeys:nil]];
+    
+    [boilerData removeObjectsForKeys:@[@"lastServerSyncDate",@"lastUpdatedDate"]];
+    
+    NSError *theError;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:boilerData options:NSJSONWritingPrettyPrinted error:&theError];
+    
     UIPasteboard * pasteboard=[UIPasteboard generalPasteboard];
-    [pasteboard setString:text];
+    [pasteboard setData:jsonData forPasteboardType:@"MyPasteBoardSpaces"];
     
-    //Method 2
-    NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
-    [pasteboard setData:data forPasteboardType:(NSString *)kUTTypeText];
 }
--(void)readDataFromPasteBoard
-{
-    UIPasteboard * pasteboard=[UIPasteboard generalPasteboard];
-    //Method 1
-    NSLog(@"Text =%@",[pasteboard string]);
-    
-    //Method 2
-    NSData * data = [pasteboard dataForPasteboardType:(NSString*)kUTTypeText];
-    NSString * text =[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"Text =%@",text);
-}
-
--(void)storeDataToPasteBoardFromSyncKitAppl:(NSDictionary*)dictionary
-{
-    
-    UIPasteboard * pb = [UIPasteboard pasteboardWithName:PASTE_BOARD_NAME create:YES];
-    [pb setPersistent:TRUE];
-    
-    [pb setData:[NSKeyedArchiver archivedDataWithRootObject:dictionary] forPasteboardType:PASTE_BOARD_TYPE];
-}
-
--(NSDictionary*) readFromPasteboard
-{
-    
-    UIPasteboard * pb=[UIPasteboard pasteboardWithName:PASTE_BOARD_NAME create:NO];
-    NSData * data=[pb valueForPasteboardType:PASTE_BOARD_TYPE];
-    NSDictionary * dict;
-    
-    if (!data) {
-        return nil;
-    }
-    @try {
-        dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    @catch (NSException* exception)
-    {
-        NSLog(@"Exception: %@",exception);
-        return nil;
-    }
-    return dict;
-}
-
--(void)removepasteBoardContent
-{
-    
-    [UIPasteboard removePasteboardWithName:PASTE_BOARD_NAME];
-}
-
 -(void)shareViaActivityViewControllerMethod
 {
-    NSString *textToShare = @"Look at this awesome website for aspiring iOS Developers!";
-    NSURL *myWebsite = [NSURL URLWithString:@"http://www.codingexplorer.com/"];
+   /* NSString *textToShare = @"Look at this awesome website for aspiring iOS Developers!";
+    NSURL *myWebsite = [NSURL URLWithString:@"http://www.codingexplorer.com/"];*/
     
-    NSArray *objectsToShare = @[textToShare, myWebsite];
+    NSMutableDictionary *boilerData = [NSMutableDictionary dictionaryWithDictionary:[self.boilerObject committedValuesForKeys:nil]];
+    
+    [boilerData removeObjectsForKeys:@[@"lastServerSyncDate",@"lastUpdatedDate"]];
+    
+    NSArray *objectsToShare = @[boilerData];
     
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     
@@ -417,12 +382,7 @@ popup.tag = 1;
     
     [self presentViewController:activityVC animated:YES completion:nil];
 }
--(void)storeIntoKeychain
-{
-    NSDictionary *dict = @{@"1":@"one",@"2":@"two"};
-    //KeychainAppManager *sso = [[KeychainAppManager alloc]init];
-    //[sso setInstallionQueuedFlag:dict];
-}
+
 /*
 #pragma mark - Navigation
 
