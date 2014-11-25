@@ -246,14 +246,20 @@
     /* self.view.center = CGPointMake(self.view.center.x, self.view.center.y + 220);*/
     
     // if(textField.)
-    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
     [self animateTextField:textField up:YES];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     /* should move views */
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+
+    {
     [self animateTextField:textField up:NO];
+    }
 }
 // Workaround to hide keyboard when Done is tapped
 - (IBAction)textFieldFinished:(id)sender {
@@ -266,7 +272,6 @@
     
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
                             @"URL Scheme",
-                            @"Keychain",
                             @"PasteBoard",
                             @"ActivityViewController",
                             nil];
@@ -284,14 +289,11 @@
                     [self callViaURIScheme];
                     break;
                 case 1:
-                    break;
-                case 2:
                 {
                     [self storeintoPasteBoard];
-                    
                 }
                     break;
-                case 3:
+                case 2:
                     
                     [self shareViaActivityViewControllerMethod];
                     break;

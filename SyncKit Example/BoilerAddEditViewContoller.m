@@ -209,7 +209,14 @@
 	}
     
 	// Textfield dimensions
+    //if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    //{
 	tf.frame = CGRectMake(120, 12, 170, 30);
+    //}
+//    else
+//    {
+//       tf.frame = CGRectMake(0, 0, 170, 30);
+//    }
 	
 	// Workaround to dismiss keyboard when Done/Return is tapped
 	[tf addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -231,6 +238,7 @@
 	UITextField *tf = [[UITextField alloc] init];
 	tf.placeholder = placeholder ;
 	tf.text = text ;
+    [tf setBackgroundColor:[UIColor purpleColor]];
 	tf.autocorrectionType = UITextAutocorrectionTypeNo ;
 	tf.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	tf.adjustsFontSizeToFitWidth = YES;
@@ -244,13 +252,19 @@
     
    // if(textField.)
     
-    [self animateTextField:textField up:YES];
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
+     [self animateTextField:textField up:YES];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     /* should move views */
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+    {
     [self animateTextField:textField up:NO];
+    }
 
     
 }
@@ -266,7 +280,6 @@
     
 UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:@"Select Sharing option:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:
                         @"URL Scheme",
-                        @"Keychain",
                         @"PasteBoard",
                         @"ActivityViewController",
                         nil];
@@ -284,14 +297,11 @@ popup.tag = 1;
                     [self callViaURIScheme];
                     break;
                 case 1:
-                    break;
-                case 2:
                 {
                     [self storeintoPasteBoard];
-                    
                 }
                     break;
-                case 3:
+                case 2:
                     
                     [self shareViaActivityViewControllerMethod];
                     break;

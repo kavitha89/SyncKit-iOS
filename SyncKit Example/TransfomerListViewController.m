@@ -38,19 +38,11 @@
     self.title = @"Transformers";
     
     [syncKit.syncEngine.conflictManager setConflictResolutionDelegate:self];
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(itemsSynced) name:ckSyncEngineSyncCompletedNotificationName object:nil];
-    
-
-    
+ 
     UIBarButtonItem *addNewsButton  = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAuthorPressed)];
     
     [self.navigationItem setRightBarButtonItems:[[NSArray alloc]initWithObjects:addNewsButton,nil]];
-    
-    
-    [self itemsSynced];
-    
+  
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -61,6 +53,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self itemsSynced];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(itemsSynced) name:ckSyncEngineSyncCompletedNotificationName object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(conflictedObjects:) name:ckSyncEngineConflictedObjectsNotification object:nil];
 
 }
