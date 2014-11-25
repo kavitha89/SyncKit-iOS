@@ -163,7 +163,7 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView_ cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"CellIdentifier";
+    static NSString *CellIdentifier = @"transformerCell";
     
     // Dequeue or create a cell of the appropriate type.
     UITableViewCell *cell = [tableView_ dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -171,9 +171,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
     }
-	//if you want to add an image to your cell, here's how
-	UIImage *image = [UIImage imageNamed:@"icon.png"];
-	cell.imageView.image = image;
     
 	// Configure the cell to show the data.
 	Transformer *trItem = [trItems objectAtIndex:indexPath.row];
@@ -191,8 +188,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle: nil];
-    TransfomerAddEditViewController *addEditVC = [storyboard instantiateViewControllerWithIdentifier:@"TransfomerAddEditViewController"];
+    TransfomerAddEditViewController *addEditVC = [self.storyboard instantiateViewControllerWithIdentifier:@"TransfomerAddEditViewController"];
      addEditVC.trObject = [trItems objectAtIndex:self.tableView.indexPathForSelectedRow.row];
     [self.navigationController pushViewController:addEditVC animated:YES];
     

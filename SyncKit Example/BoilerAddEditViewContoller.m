@@ -8,7 +8,7 @@
 
 #import "BoilerAddEditViewContoller.h"
 #import "kCoreDataController.h"
-#import "KeychainAppManager.h"
+//#import "KeychainAppManager.h"
 
 @interface BoilerAddEditViewContoller ()<UITextFieldDelegate,UIActionSheetDelegate>
 {
@@ -420,8 +420,8 @@ popup.tag = 1;
 -(void)storeIntoKeychain
 {
     NSDictionary *dict = @{@"1":@"one",@"2":@"two"};
-    KeychainAppManager *sso = [[KeychainAppManager alloc]init];
-    [sso setInstallionQueuedFlag:dict];
+    //KeychainAppManager *sso = [[KeychainAppManager alloc]init];
+    //[sso setInstallionQueuedFlag:dict];
 }
 /*
 #pragma mark - Navigation
