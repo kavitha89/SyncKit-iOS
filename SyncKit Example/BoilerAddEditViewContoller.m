@@ -405,12 +405,12 @@ popup.tag = 1;
     
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     
-    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
-                                   UIActivityTypePrint,
-                                   UIActivityTypeAssignToContact,
-                                   UIActivityTypeSaveToCameraRoll,
-                                   UIActivityTypeAddToReadingList,
-                                   UIActivityTypePostToFlickr,
+    NSArray *excludeActivities = @[//UIActivityTypeAirDrop,
+                                   //UIActivityTypePrint,
+                                   //UIActivityTypeAssignToContact,
+                                   //UIActivityTypeSaveToCameraRoll,
+                                   //UIActivityTypeAddToReadingList,
+                                   //UIActivityTypePostToFlickr,
                                    UIActivityTypePostToVimeo];
     
     activityVC.excludedActivityTypes = excludeActivities;

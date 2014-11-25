@@ -7,7 +7,6 @@
 //
 
 #import "SettingsViewController.h"
-#import "dataSharingViewController.h"
 #import "kSyncKit.h"
 
 @interface SettingsViewController ()
@@ -33,11 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"Settings";
-    
-    /** Data Sharing between apps Concept. **/
-    
-    UIBarButtonItem *dataSharingButton  = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(dataSharingButtonButtonPressed)];
-    [self.navigationItem setRightBarButtonItems:[[NSArray alloc]initWithObjects:dataSharingButton,nil]];
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -111,10 +105,5 @@
 	}
 }
 
-#pragma mark DataSharing between apps
 
--(void)dataSharingButtonButtonPressed{
-    dataSharingViewController *datasharingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"dataSharingViewController"];
-    [self.navigationController pushViewController:datasharingVC animated:YES];
-}
 @end

@@ -58,22 +58,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SyncKit Example/BoilerAddEditViewContoller.m"
-            timestampString = "438538624.594849"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
-            landmarkName = "-actionSheet:clickedButtonAtIndex:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SyncKit Example/BoilerAddEditViewContoller.m"
             timestampString = "438539057.127119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

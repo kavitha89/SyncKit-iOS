@@ -174,9 +174,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
     }
-	//if you want to add an image to your cell, here's how
-	//UIImage *image = [UIImage imageNamed:@"icon.png"];
-	//cell.imageView.image = image;
+
     
 	// Configure the cell to show the data.
 	Boiler *newsItem = [newsItems objectAtIndex:indexPath.row];
